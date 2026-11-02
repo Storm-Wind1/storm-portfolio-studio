@@ -143,7 +143,7 @@ function ProjectCard({ p, index }: { p: Project; index: number }) {
     <Reveal className="group grid overflow-hidden rounded-3xl border bg-card shadow-card transition hover:border-primary/40 md:col-span-2 lg:grid-cols-[1.3fr_1fr]">
       <a href={p.liveUrl} {...ext} aria-label={`Open ${p.name} live site`} className="relative block overflow-hidden bg-muted">
         {p.image ? (
-          <img src={p.image} alt={`Screenshot of the ${p.name} website homepage`} loading="lazy" width={1200} height={750} className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-[1.03]" />
+          <img src={p.image} alt={`Screenshot of the ${p.name} website homepage`} loading="lazy" width={1200} height={750} className="h-full w-full object-cover object-left-top transition duration-700 group-hover:scale-[1.03]" />
         ) : (
           <div className="flex aspect-video items-center justify-center font-mono text-xs text-muted-foreground">Screenshot placeholder</div>
         )}
