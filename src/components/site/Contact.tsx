@@ -35,6 +35,11 @@ export function Contact() {
   const [notice, setNotice] = useState(false);
   const { copied, copy } = useCopyUsername();
 
+  const clearError = (key: keyof Errors) => {
+    setErrors((current) => ({ ...current, [key]: undefined }));
+    setNotice(false);
+  };
+
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(e.currentTarget));
@@ -48,6 +53,22 @@ export function Contact() {
     }
     setErrors({});
     setNotice(true);
+
+    // GitHub Pages cannot deliver mail on its own. Open a prepared email
+    // draft instead of incorrectly claiming that the form was submitted.
+    if (!CONTACT_EMAIL) return;
+    const { name, email, projectType, message } = res.data;
+    const subject = `New ${projectType} inquiry — STORM portfolio`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${email}`,
+      `Project type: ${projectType}`,
+      "",
+      "Message:",
+      message,
+    ].join("\n");
+    window.location.href =
+      `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const err = (k: keyof Errors) => errors[k] && <p id={`${k}-err`} className="mt-1.5 text-sm text-destructive">{errors[k]}</p>;
@@ -69,14 +90,18 @@ export function Contact() {
                   {copied ? <Check className="size-4 text-cyan" /> : <Copy className="size-4" />}
                 </button>
               </li>
-              <li className="flex items-center gap-3 rounded-2xl border border-dashed p-4 text-muted-foreground">
-                <Linkedin className="size-5" aria-hidden />
-                {LINKEDIN_URL ? <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-foreground">LinkedIn</a> : <span>LinkedIn — <em>not configured yet</em></span>}
-              </li>
-              <li className="flex items-center gap-3 rounded-2xl border border-dashed p-4 text-muted-foreground">
-                <Mail className="size-5" aria-hidden />
-                {CONTACT_EMAIL ? <a href={`mailto:${CONTACT_EMAIL}`} className="hover:text-foreground">{CONTACT_EMAIL}</a> : <span>Professional email — <em>not configured yet</em></span>}
-              </li>
+              {LINKEDIN_URL && (
+                <li className="flex items-center gap-3 rounded-2xl border bg-card p-4">
+                  <Linkedin className="size-5" aria-hidden />
+                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-cyan">LinkedIn</a>
+                </li>
+              )}
+              {CONTACT_EMAIL && (
+                <li className="flex items-center gap-3 rounded-2xl border bg-card p-4">
+                  <Mail className="size-5" aria-hidden />
+                  <a href={`mailto:${CONTACT_EMAIL}`} className="break-all hover:text-cyan">{CONTACT_EMAIL}</a>
+                </li>
+              )}
             </ul>
           </Reveal>
 
@@ -85,18 +110,18 @@ export function Contact() {
               <div className="grid gap-5 sm:grid-cols-2">
                 <div>
                   <label htmlFor="name" className="mb-2 block text-sm font-medium">Name</label>
-                  <input id="name" name="name" autoComplete="name" maxLength={100} className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-err" : undefined} />
+                  <input id="name" name="name" autoComplete="name" maxLength={100} onChange={() => clearError("name")} className={field} aria-invalid={!!errors.name} aria-describedby={errors.name ? "name-err" : undefined} />
                   {err("name")}
                 </div>
                 <div>
                   <label htmlFor="email" className="mb-2 block text-sm font-medium">Email</label>
-                  <input id="email" name="email" type="email" autoComplete="email" maxLength={255} className={field} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-err" : undefined} />
+                  <input id="email" name="email" type="email" autoComplete="email" maxLength={255} onChange={() => clearError("email")} className={field} aria-invalid={!!errors.email} aria-describedby={errors.email ? "email-err" : undefined} />
                   {err("email")}
                 </div>
               </div>
               <div>
                 <label htmlFor="projectType" className="mb-2 block text-sm font-medium">Project type</label>
-                <select id="projectType" name="projectType" defaultValue="" className={field} aria-invalid={!!errors.projectType} aria-describedby={errors.projectType ? "projectType-err" : undefined}>
+                <select id="projectType" name="projectType" defaultValue="" onChange={() => clearError("projectType")} className={`${field} cursor-pointer`} style={{ colorScheme: "dark" }} aria-invalid={!!errors.projectType} aria-describedby={errors.projectType ? "projectType-err" : undefined}>
                   <option value="" disabled>Select one…</option>
                   <option>Landing page</option>
                   <option>Business website</option>
@@ -107,15 +132,16 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="message" className="mb-2 block text-sm font-medium">Message</label>
-                <textarea id="message" name="message" rows={5} maxLength={2000} className={field} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-err" : undefined} />
+                <textarea id="message" name="message" rows={5} maxLength={2000} onChange={() => clearError("message")} className={field} aria-invalid={!!errors.message} aria-describedby={errors.message ? "message-err" : undefined} />
                 {err("message")}
               </div>
-              <button type="submit" className="w-full rounded-full bg-foreground px-6 py-3 font-medium text-background transition hover:shadow-glow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Send Message</button>
+              <button type="submit" className="w-full rounded-full bg-foreground px-6 py-3 font-medium text-background transition hover:shadow-glow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Open Email Draft</button>
+              <p className="text-center text-xs text-muted-foreground">We'll prepare your message in your email app. You'll review and send it there.</p>
               <div id="form-status" role="status" aria-live="polite">
                 {notice && (
                   <div className="flex gap-3 rounded-2xl border border-primary/40 bg-accent p-4 text-sm">
                     <AlertTriangle className="mt-0.5 size-4 shrink-0 text-cyan" aria-hidden />
-                    <p><strong>Message not sent — the contact form isn't connected yet.</strong> Your details look good, but no delivery service is set up, so nothing was sent or stored. Please reach out via GitHub for now.</p>
+                    <p>{CONTACT_EMAIL ? <>Your email app should open with a prepared message. <strong>No email has been sent yet.</strong> Please press Send in your email app. If nothing opens, email <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a> directly.</> : <>Email is not configured yet. Nothing was sent or stored. Please reach out via GitHub.</>}</p>
                   </div>
                 )}
               </div>
