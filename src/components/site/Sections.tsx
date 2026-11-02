@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, BrainCircuit, Code2, Compass, ExternalLink, Github, MapPin, Server, Sparkles, Telescope, Wrench } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BrainCircuit, Code2, Compass, ExternalLink, Github, MapPin, Server, ShieldCheck, Sparkles, Telescope, Wrench } from "lucide-react";
 import { APPROACH, GITHUB_URL, PROJECTS, SKILLS, type Project } from "@/data/portfolio";
 import { Reveal, SectionHeading } from "./Reveal";
 
@@ -22,7 +22,7 @@ export function Hero() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              I'm a web developer based in Namibia, passionate about building modern, responsive, and purposeful digital experiences. I turn ideas into websites that look great, work smoothly, and deliver real value.
+              I'm a Namibia-based developer building responsive websites, Python backend services, and practical full-stack applications. I enjoy connecting polished interfaces to real functionality and exploring AI-assisted tools.
             </p>
           </Reveal>
           <Reveal delay={0.24} className="mt-10 flex flex-wrap gap-3">
@@ -30,7 +30,7 @@ export function Hero() {
             <a href="#contact" className={`${btnBase} border hover:border-primary hover:bg-accent`}>Let's Work Together</a>
             <a href={GITHUB_URL} {...ext} className={`${btnBase} text-muted-foreground hover:text-foreground`}><Github className="size-4" /> Explore My GitHub <ArrowUpRight className="size-4" /></a>
           </Reveal>
-          <p className="mt-10 font-mono text-xs text-muted-foreground">Web Developer · Creative Technologist · Problem Solver</p>
+          <p className="mt-10 font-mono text-xs text-muted-foreground">Web & Backend Developer · Creative Technologist · Problem Solver</p>
         </div>
 
         <motion.div
@@ -74,8 +74,8 @@ export function About() {
       <SectionHeading eyebrow="About" title="More Than Just Code." />
       <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-          <p><span className="text-foreground">I'm Lemmy Nyambe, a Namibia-based developer</span> with a passion for technology, creative problem-solving, and building things that people can use. I enjoy bringing ideas to life through modern web development, from carefully designed landing pages to interactive digital experiences.</p>
-          <p>My interests go beyond website design. I'm also interested in software engineering, cybersecurity, AI-powered tools, and the technologies shaping the future of digital products.</p>
+          <p><span className="text-foreground">I'm Lemmy Nyambe, a Namibia-based developer</span> with a passion for technology, creative problem-solving, and building things that people can use. I enjoy bringing ideas to life through frontend interfaces, Python backend development, REST APIs, and interactive applications.</p>
+          <p>My work extends beyond website design into software engineering, backend systems, and AI integration. Through the team-built INPUTIQ hackathon prototype, I've worked with FastAPI, security scanning tools, and AI-assisted findings to bring multiple technologies into one workflow.</p>
           <p className="font-display text-3xl leading-snug text-foreground">"I believe great development combines clean implementation, meaningful design, and an understanding of what users actually need."</p>
         </Reveal>
         <Reveal delay={0.1}>
@@ -216,6 +216,39 @@ export function Skills() {
 }
 
 function ProjectCard({ p, index }: { p: Project; index: number }) {
+  if (p.status === "prototype") {
+    return (
+      <Reveal className="group grid overflow-hidden rounded-3xl border bg-card shadow-card transition hover:border-primary/40 md:col-span-2 lg:grid-cols-[1.05fr_1fr]">
+        <div className="relative flex min-h-72 flex-col justify-between overflow-hidden bg-surface p-8 sm:p-10" aria-label="INPUTIQ project overview graphic">
+          <div aria-hidden className="absolute inset-0 bg-glow opacity-70" />
+          <div aria-hidden className="absolute inset-0 bg-grid opacity-40" />
+          <div className="relative flex items-center justify-between gap-4">
+            <span className="rounded-full border border-cyan/30 bg-background/70 px-3 py-1 font-mono text-xs text-cyan">Team hackathon prototype</span>
+            <ShieldCheck className="size-9 text-cyan" aria-hidden />
+          </div>
+          <div className="relative my-12">
+            <p className="font-mono text-xs tracking-[0.3em] text-cyan">SECURITY COMPANION</p>
+            <p className="mt-4 font-display text-6xl sm:text-7xl">INPUT<span className="text-gradient">IQ.</span></p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">Code analysis • Web security scanning • AI-assisted reporting</p>
+          </div>
+          <p className="relative font-mono text-xs text-muted-foreground">Project overview illustration — not a product screenshot</p>
+        </div>
+        <div className="flex flex-col p-8 md:p-10">
+          <p className="eyebrow">{p.category}</p>
+          <h3 className="mt-4 font-display text-5xl">{p.name}</h3>
+          <p className="mt-5 leading-relaxed text-muted-foreground">{p.description}</p>
+          <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technologies">
+            {p.tags.map((tag) => (
+              <li key={tag} className="rounded-full bg-secondary px-3 py-1 font-mono text-xs">{tag}</li>
+            ))}
+          </ul>
+          <p className="mt-auto pt-8 font-mono text-xs text-muted-foreground">
+            Team prototype · No public demo or source link listed
+          </p>
+        </div>
+      </Reveal>
+    );
+  }
   if (p.status === "upcoming") {
     return (
       <Reveal delay={index * 0.08} className="flex flex-col justify-between rounded-3xl border border-dashed p-8">
