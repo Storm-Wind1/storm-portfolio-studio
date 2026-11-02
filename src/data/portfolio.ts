@@ -4,7 +4,7 @@ export const GITHUB_USERNAME = "Storm-Wind1";
 export const GITHUB_URL = "https://github.com/Storm-Wind1";
 
 /** Set these when ready; null shows a "not configured" note in Contact. */
-export const LINKEDIN_URL: string | null = null;
+export const LINKEDIN_URL: string | null = "https://www.linkedin.com/in/lemmy-nyambe-a8449632b/";
 export const CONTACT_EMAIL: string | null = "nyambe.lemmy2@gmail.com";
 
 export const NAV = [
