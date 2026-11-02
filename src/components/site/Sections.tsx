@@ -43,7 +43,7 @@ export function Hero() {
           <div className="absolute inset-0 rounded-full bg-accent-gradient opacity-20 blur-3xl" />
           <motion.div
             className="absolute inset-4 rounded-full border border-dashed border-foreground/15"
-            animate={reduce ? undefined : { rotate: 360 }}
+            animate={reduce ? { rotate: 0 } : { rotate: 360 }}
             transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
           />
           <div className="absolute inset-12 flex flex-col justify-between rounded-[2rem] border bg-card/80 p-6 shadow-card backdrop-blur">
