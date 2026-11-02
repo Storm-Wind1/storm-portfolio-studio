@@ -82,24 +82,49 @@ export function Contact() {
           <Reveal className="space-y-6">
             <p className="text-lg leading-relaxed text-muted-foreground">Whether you need a landing page, a business website, or a modern frontend experience, I'd love to hear about your project.</p>
             <ul className="space-y-3">
-              <li className="flex items-center justify-between gap-3 rounded-2xl border bg-card p-4">
-                <a href={GITHUB_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 hover:text-cyan">
-                  <Github className="size-5" aria-hidden /> <span>github.com/{GITHUB_USERNAME}</span>
-                </a>
-                <button type="button" onClick={copy} aria-label="Copy GitHub username" className="inline-flex size-9 items-center justify-center rounded-full border transition hover:border-cyan focus-visible:outline-2 focus-visible:outline-ring">
+              <li className="group relative flex items-center justify-between gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 focus-within:border-cyan/60">
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Visit my GitHub profile"
+                  className="absolute inset-0 rounded-2xl focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                />
+                <span className="pointer-events-none flex min-w-0 items-center gap-3 transition-colors group-hover:text-cyan">
+                  <Github className="size-5 shrink-0" aria-hidden />
+                  <span className="break-all">github.com/{GITHUB_USERNAME}</span>
+                </span>
+                <button
+                  type="button"
+                  onClick={copy}
+                  aria-label="Copy GitHub username"
+                  className="relative z-10 inline-flex size-9 shrink-0 items-center justify-center rounded-full border transition hover:border-cyan focus-visible:outline-2 focus-visible:outline-ring"
+                >
                   {copied ? <Check className="size-4 text-cyan" /> : <Copy className="size-4" />}
                 </button>
               </li>
               {LINKEDIN_URL && (
-                <li className="flex items-center gap-3 rounded-2xl border bg-card p-4">
-                  <Linkedin className="size-5" aria-hidden />
-                  <a href={LINKEDIN_URL} target="_blank" rel="noopener noreferrer" className="hover:text-cyan">LinkedIn</a>
+                <li>
+                  <a
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                  >
+                    <Linkedin className="size-5 shrink-0" aria-hidden />
+                    <span>LinkedIn — Lemmy Nyambe</span>
+                  </a>
                 </li>
               )}
               {CONTACT_EMAIL && (
-                <li className="flex items-center gap-3 rounded-2xl border bg-card p-4">
-                  <Mail className="size-5" aria-hidden />
-                  <a href={`mailto:${CONTACT_EMAIL}`} className="break-all hover:text-cyan">{CONTACT_EMAIL}</a>
+                <li>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                  >
+                    <Mail className="size-5 shrink-0" aria-hidden />
+                    <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
+                  </a>
                 </li>
               )}
             </ul>
