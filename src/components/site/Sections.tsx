@@ -1,5 +1,5 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Code2, Compass, Github, MapPin, Sparkles, Telescope } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BrainCircuit, Code2, Compass, ExternalLink, Github, MapPin, Server, Sparkles, Telescope, Wrench } from "lucide-react";
 import { APPROACH, GITHUB_URL, PROJECTS, SKILLS, type Project } from "@/data/portfolio";
 import { Reveal, SectionHeading } from "./Reveal";
 
@@ -93,33 +93,122 @@ export function About() {
   );
 }
 
+const arsenalIcons = [Code2, Server, BrainCircuit, Wrench];
+
 export function Skills() {
   return (
-    <section id="skills" className="border-y bg-surface">
-      <div className="mx-auto max-w-6xl px-5 py-28 md:px-8 md:py-36">
-        <SectionHeading eyebrow="Skills" title="Tools I build with." />
-        <div className="grid gap-4 md:grid-cols-2">
-          {SKILLS.core.map((g, i) => (
-            <Reveal key={g.title} delay={i * 0.08} className="rounded-2xl border bg-card p-7">
-              <div className="mb-6 flex items-baseline justify-between">
-                <h3 className="text-xl font-semibold">{g.title}</h3>
-                <span className="font-mono text-xs text-cyan">main stack</span>
-              </div>
-              <ul className="flex flex-wrap gap-2">
-                {g.items.map((s) => <li key={s} className="rounded-full border bg-secondary px-4 py-1.5 text-sm transition hover:border-cyan/60">{s}</li>)}
-              </ul>
-            </Reveal>
-          ))}
-          <Reveal delay={0.16} className="rounded-2xl border border-dashed p-7 md:col-span-2">
-            <div className="mb-6 flex items-center gap-3">
-              <Telescope className="size-5 text-primary" aria-hidden />
-              <h3 className="text-xl font-semibold">Additional technologies & exploration</h3>
+    <section id="skills" className="relative overflow-hidden border-y bg-surface">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-96 bg-glow opacity-30" />
+      <div className="relative mx-auto max-w-6xl px-5 py-28 md:px-8 md:py-36">
+        <SectionHeading eyebrow="Technical expertise" title="My Technical Arsenal." />
+        <Reveal className="-mt-7 mb-12 max-w-2xl md:-mt-10 md:mb-16">
+          <p className="text-lg leading-relaxed text-muted-foreground">
+            A growing toolkit for building software, exploring intelligent systems, and solving real-world problems.
+          </p>
+        </Reveal>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          {SKILLS.categories.map((group, i) => {
+            const Icon = arsenalIcons[i];
+            const cyan = i % 2 === 0;
+            return (
+              <Reveal
+                key={group.number}
+                delay={i * 0.07}
+                className="group relative flex h-full flex-col overflow-hidden rounded-3xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-card sm:p-8"
+              >
+                <div aria-hidden className={`pointer-events-none absolute right-0 top-0 size-36 rounded-full blur-3xl transition-opacity duration-300 group-hover:opacity-100 ${cyan ? "bg-cyan/5 opacity-40" : "bg-primary/10 opacity-40"}`} />
+                <div className="relative mb-7 flex items-start justify-between gap-4">
+                  <div className={`flex size-13 items-center justify-center rounded-2xl border ${cyan ? "border-cyan/25 bg-cyan/10 text-cyan" : "border-primary/25 bg-primary/10 text-primary"}`}>
+                    <Icon className="size-6" aria-hidden />
+                  </div>
+                  <span className="font-mono text-xs tracking-widest text-muted-foreground">{group.number} / 04</span>
+                </div>
+                <div className="relative mb-3 flex flex-wrap items-center gap-3">
+                  <h3 className="text-xl font-semibold tracking-tight sm:text-2xl">{group.title}</h3>
+                  <span className={`rounded-full border px-2.5 py-1 font-mono text-[10px] uppercase tracking-wide ${cyan ? "border-cyan/25 text-cyan" : "border-primary/35 text-primary"}`}>
+                    {group.status}
+                  </span>
+                </div>
+                <p className="relative mb-7 max-w-md text-sm leading-relaxed text-muted-foreground">{group.description}</p>
+                <ul className="relative mt-auto flex flex-wrap gap-2" aria-label={`${group.title} technologies`}>
+                  {group.items.map((item) => (
+                    <li
+                      key={item}
+                      className={`rounded-full border bg-secondary/60 px-3.5 py-2 text-sm text-foreground transition-colors duration-200 ${cyan ? "hover:border-cyan/50 hover:bg-cyan/10" : "hover:border-primary/50 hover:bg-primary/10"}`}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        <Reveal className="mt-5 rounded-3xl border border-dashed border-primary/30 bg-card/40 p-6 sm:p-8">
+          <div className="flex flex-wrap items-start gap-4">
+            <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl border border-primary/25 bg-primary/10 text-primary">
+              <Telescope className="size-6" aria-hidden />
             </div>
-            <p className="mb-5 text-sm text-muted-foreground">Areas I'm actively learning and experimenting with.</p>
-            <ul className="flex flex-wrap gap-2">
-              {SKILLS.exploring.map((s) => <li key={s} className="rounded-full border border-primary/30 px-4 py-1.5 text-sm text-muted-foreground">{s}</li>)}
-            </ul>
+            <div>
+              <h3 className="text-xl font-semibold">Currently Exploring</h3>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">
+                Technologies and disciplines I'm actively expanding my knowledge in.
+              </p>
+            </div>
+          </div>
+          <ul className="mt-7 flex flex-wrap gap-2">
+            {SKILLS.exploring.map((item) => (
+              <li key={item} className="rounded-full border border-primary/30 px-4 py-2 text-sm text-muted-foreground transition-colors hover:border-primary/60 hover:text-foreground">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
+
+        <div className="mt-20 md:mt-24">
+          <Reveal className="mb-8 max-w-2xl">
+            <p className="eyebrow mb-3">Skills in practice</p>
+            <h3 className="font-display text-4xl leading-tight sm:text-5xl">Applied in Real Projects.</h3>
+            <p className="mt-4 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              A selection of projects and practical work behind the technologies above. Public demos and source code are linked where available.
+            </p>
           </Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {SKILLS.appliedProjects.map((project, i) => (
+              <Reveal
+                key={project.name}
+                delay={i * 0.07}
+                className="group flex h-full flex-col rounded-2xl border bg-card/80 p-6 transition-all duration-300 hover:border-cyan/40 hover:shadow-card"
+              >
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <span className="font-mono text-xs text-cyan">0{i + 1}</span>
+                  <span className="text-xs text-muted-foreground">{project.category}</span>
+                </div>
+                <h4 className="text-lg font-semibold sm:text-xl">{project.name}</h4>
+                <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Technologies used for ${project.name}`}>
+                  {project.technologies.map((tech) => (
+                    <li key={tech} className="rounded-full border bg-secondary px-3 py-1.5 font-mono text-xs text-muted-foreground">{tech}</li>
+                  ))}
+                </ul>
+                <div className="mt-auto pt-6">
+                  {"url" in project && project.url ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded text-sm font-medium text-cyan transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                    >
+                      View live project <ExternalLink className="size-4" aria-hidden />
+                    </a>
+                  ) : (
+                    <span className="font-mono text-xs text-muted-foreground">Case study link not added yet</span>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
