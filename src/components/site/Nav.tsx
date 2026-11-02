@@ -32,7 +32,7 @@ export function Nav() {
     <header className={cn("fixed inset-x-0 top-0 z-50 transition-colors duration-300", scrolled || open ? "border-b bg-background/80 backdrop-blur-xl" : "bg-transparent")}>
       <nav aria-label="Main" className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:px-8">
         <a href="#home" aria-label="STORM — back to top" className="rounded focus-visible:outline-2 focus-visible:outline-ring"><Wordmark /></a>
-        <ul className="hidden items-center gap-1 md:flex">
+        <ul className="hidden items-center gap-1 lg:flex">
           {NAV.map((n) => (
             <li key={n.id}>
               <a
@@ -50,7 +50,7 @@ export function Nav() {
           <a href="#contact" className="hidden rounded-full bg-foreground px-5 py-2 text-sm font-medium text-background transition hover:shadow-glow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:inline-flex">Hire Me</a>
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-full border md:hidden focus-visible:outline-2 focus-visible:outline-ring"
+            className="inline-flex size-10 items-center justify-center rounded-full border lg:hidden focus-visible:outline-2 focus-visible:outline-ring"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
             aria-controls="mobile-menu"
@@ -61,7 +61,7 @@ export function Nav() {
         </div>
       </nav>
       {open && (
-        <div id="mobile-menu" className="border-t md:hidden">
+        <div id="mobile-menu" className="border-t lg:hidden">
           <ul className="mx-auto flex max-w-6xl flex-col px-5 py-4">
             {NAV.map((n) => (
               <li key={n.id}>
