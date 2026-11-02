@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Nav } from "@/components/site/Nav";
 import { About, Approach, Hero, Projects, Skills } from "@/components/site/Sections";
+import { Services } from "@/components/site/Services";
 import { Contact, Footer } from "@/components/site/Contact";
 
-const title = "STORM — Lemmy Nyambe, Web Developer in Windhoek";
-const description = "Portfolio of Lemmy Nyambe (STORM), a Namibia-based web developer building modern, responsive, purposeful digital experiences.";
+const title = "STORM — Lemmy Nyambe, Web & Backend Developer in Windhoek";
+const description = "Portfolio of Lemmy Nyambe (STORM), a Namibia-based developer creating responsive websites, Python backend APIs, full-stack applications, and practical AI-assisted tools.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,6 +31,7 @@ function Index() {
         <About />
         <Skills />
         <Projects />
+        <Services />
         <Approach />
         <Contact />
       </main>
