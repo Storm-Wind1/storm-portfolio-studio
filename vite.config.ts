@@ -1,20 +1,21 @@
-// Lovable's configuration helper already registers the React, TanStack Start,
-// Tailwind, and Nitro plugins. Do not register those plugins a second time.
+// Lovable's configuration helper already registers TanStack Start, React,
+// Tailwind and Nitro. Do not register any of those plugins a second time.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
-// Enable GitHub Pages-specific settings only in the GitHub Actions build.
-// The normal Lovable preview and deployment keep their existing root URL.
+// The same source powers three builds:
+// - Lovable preview / hosting: base "/", SSR enabled
+// - Existing project GitHub Pages: base "/storm-portfolio-studio/", prerender
+// - Clean user GitHub Pages: base "/", prerender
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
+const isUserHomepage = process.env.GITHUB_PAGES_ROOT === "true";
 
 export default defineConfig({
   vite: {
-    base: isGitHubPages ? "/storm-portfolio-studio/" : "/",
+    base: isGitHubPages && !isUserHomepage ? "/storm-portfolio-studio/" : "/",
   },
   tanstackStart: {
-    // Retain Lovable's existing custom server entry.
+    // Preserve Lovable's original server entry.
     server: { entry: "server" },
-    // GitHub Pages cannot run a server, so render the page during the build.
-    // Keep Lovable's usual server-rendered build unchanged.
     prerender: {
       enabled: isGitHubPages,
       crawlLinks: true,
