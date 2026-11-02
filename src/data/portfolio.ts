@@ -12,6 +12,7 @@ export const NAV = [
   { id: "about", label: "About" },
   { id: "skills", label: "Skills" },
   { id: "projects", label: "Projects" },
+  { id: "services", label: "Services" },
   { id: "approach", label: "Approach" },
   { id: "contact", label: "Contact" },
 ] as const;
@@ -21,7 +22,7 @@ export type Project = {
   category: string;
   description: string;
   tags: string[];
-  status: "live" | "upcoming";
+  status: "live" | "prototype" | "upcoming";
   image?: string;
   liveUrl?: string;
   sourceUrl?: string;
@@ -39,6 +40,14 @@ export const PROJECTS: Project[] = [
     image: serenityShot,
     liveUrl: "https://placeserenity.com/",
     sourceUrl: "https://github.com/Storm-Wind1/place-of-serenity-landing",
+  },
+  {
+    name: "INPUTIQ",
+    category: "AI-Assisted Security Platform / Hackathon Prototype",
+    description:
+      "A team-built hackathon prototype that combines Python/FastAPI backend services, pre-deployment code analysis, web security scanning, and AI-assisted findings and remediation guidance. Integrates Semgrep and OWASP ZAP, with an interactive frontend and a reporting workflow. A prototype—not a production security service.",
+    tags: ["Python", "FastAPI", "REST APIs", "Next.js", "Semgrep", "OWASP ZAP", "AI Integration"],
+    status: "prototype",
   },
   {
     name: "Upcoming Project",
@@ -71,8 +80,8 @@ export const SKILLS = {
       number: "02",
       title: "Backend & Programming",
       status: "Hands-on",
-      description: "Developing application logic, backend services, and web applications.",
-      items: ["Python", "Flask", "Django"],
+      description: "Building Python application logic, API endpoints, and connected backend services; including hands-on FastAPI work through INPUTIQ.",
+      items: ["Python", "Flask", "Django", "FastAPI", "REST APIs"],
     },
     {
       number: "03",
@@ -89,13 +98,18 @@ export const SKILLS = {
       items: ["Git", "GitHub", "VS Code", "Vite"],
     },
   ],
-  exploring: ["Next.js", "FastAPI", "Cybersecurity", "Web Application Security", "Advanced AI/ML"],
+  exploring: ["Next.js", "Cybersecurity Fundamentals", "Secure Web Development", "Advanced AI/ML"],
   appliedProjects: [
     {
       name: "Place of Serenity",
       category: "Responsive website",
       technologies: ["React", "TypeScript", "Tailwind CSS"],
       url: "https://placeserenity.com/",
+    },
+    {
+      name: "INPUTIQ",
+      category: "Team hackathon security prototype",
+      technologies: ["Python", "FastAPI", "REST APIs", "Semgrep", "OWASP ZAP"],
     },
     {
       name: "Flask Lab Application",
@@ -114,6 +128,57 @@ export const SKILLS = {
     },
   ],
 };
+
+export const SERVICES = [
+  {
+    number: "01",
+    title: "Business Websites",
+    subtitle: "Design & frontend",
+    description: "Responsive landing pages and business websites that communicate clearly and work well on mobile.",
+    icon: "globe",
+    tags: ["Landing pages", "Responsive websites", "Modern interfaces"],
+  },
+  {
+    number: "02",
+    title: "Backend Development & APIs",
+    subtitle: "Python & server-side",
+    description: "Python backend logic, API endpoints, and integrations that connect interfaces to practical application functionality.",
+    icon: "server",
+    tags: ["Python", "Flask / Django", "FastAPI", "REST APIs"],
+  },
+  {
+    number: "03",
+    title: "Full-Stack Web Applications",
+    subtitle: "End-to-end workflows",
+    description: "Web applications that bring frontend experiences together with server-side workflows and application logic.",
+    icon: "layers",
+    tags: ["React", "Backend services", "Connected features"],
+  },
+  {
+    number: "04",
+    title: "AI-Powered Prototypes",
+    subtitle: "Practical AI integration",
+    description: "Prototyping applications with AI-assisted features, automation, and integrations, informed by project work such as INPUTIQ.",
+    icon: "brain",
+    tags: ["AI APIs", "Workflow prototypes", "Python"],
+  },
+  {
+    number: "05",
+    title: "Website Improvements",
+    subtitle: "Modernization",
+    description: "Improving existing websites through responsive updates, usability refinements, and frontend feature work.",
+    icon: "wrench",
+    tags: ["Responsive fixes", "UX improvements", "Frontend updates"],
+  },
+  {
+    number: "06",
+    title: "Developer & Security Tooling",
+    subtitle: "Exploratory project work",
+    description: "Experimental developer tools and security-conscious workflows. INPUTIQ demonstrates hands-on scanner integration—not a claim of certified security auditing.",
+    icon: "shield",
+    tags: ["Security workflows", "Scanner integration", "Developer utilities"],
+  },
+] as const;
 
 export const APPROACH = [
   { n: "01", title: "Discover", text: "Understand the goal, audience, and requirements." },
