@@ -121,8 +121,7 @@ export function Contact() {
               </div>
               <div>
                 <label htmlFor="projectType" className="mb-2 block text-sm font-medium">Project type</label>
-                <select id="projectType" name="projectType" defaultValue="" onChange={() => clearError("projectType")} className={`${field} cursor-pointer`} style={{ colorScheme: "dark" }} aria-invalid={!!errors.projectType} aria-describedby={errors.projectType ? "projectType-err" : undefined}>
-                  <option value="" disabled>Select one…</option>
+                <select id="projectType" name="projectType" defaultValue="Landing page" onChange={() => clearError("projectType")} className={`${field} cursor-pointer`} style={{ colorScheme: "dark" }} aria-invalid={!!errors.projectType} aria-describedby={errors.projectType ? "projectType-err" : undefined}>
                   <option>Landing page</option>
                   <option>Business website</option>
                   <option>Frontend experience</option>
