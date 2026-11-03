@@ -1,7 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, BrainCircuit, Code2, Compass, ExternalLink, Github, MapPin, Server, Sparkles, Telescope, Wrench } from "lucide-react";
+import { ArrowDown, ArrowUpRight, BrainCircuit, Code2, Compass, Github, MapPin, Server, Sparkles, Telescope, Wrench } from "lucide-react";
 import { APPROACH, GITHUB_URL, PROJECTS, SKILLS, type Project } from "@/data/portfolio";
 import { Reveal, SectionHeading } from "./Reveal";
+import { ActionCard } from "./ActionCard";
 
 const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
 const btnBase = "inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring";
@@ -194,14 +195,13 @@ export function Skills() {
                 </ul>
                 <div className="mt-auto pt-6">
                   {project.url && (
-                    <a
+                    <ActionCard
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded text-sm font-medium text-cyan transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
                     >
-                      View live project <ExternalLink className="size-4" aria-hidden />
-                    </a>
+                      View live project
+                    </ActionCard>
                   )}
                 </div>
               </Reveal>

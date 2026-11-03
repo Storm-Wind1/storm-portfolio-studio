@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
-import { AlertTriangle, Check, Copy, Github, Linkedin, Mail } from "lucide-react";
-import { CONTACT_EMAIL, GITHUB_URL, GITHUB_USERNAME, LINKEDIN_URL, NAV } from "@/data/portfolio";
+import { AlertTriangle, ArrowUpRight, Check, Copy, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { CONTACT_EMAIL, GITHUB_URL, GITHUB_USERNAME, LINKEDIN_PROFILE, LINKEDIN_URL, NAV } from "@/data/portfolio";
 import { Reveal, SectionHeading, Wordmark } from "./Reveal";
 
 const schema = z.object({
@@ -28,6 +28,38 @@ export function useCopyUsername() {
     }
   };
   return { copied, copy };
+}
+
+function LinkedInPreview() {
+  if (!LINKEDIN_URL) return null;
+  return (
+    <a
+      href={LINKEDIN_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`View ${LINKEDIN_PROFILE.name}'s LinkedIn profile`}
+      className="group/linkedin block overflow-hidden rounded-3xl border bg-card shadow-card transition duration-200 hover:-translate-y-1 hover:border-[#70b5f9]/60 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan motion-reduce:transform-none motion-reduce:transition-none"
+    >
+      <div className="relative flex h-20 items-start justify-between overflow-hidden bg-linear-to-br from-[#0a66c2]/50 via-[#173451] to-[#191d32] px-6 pt-4">
+        <span aria-hidden className="absolute -right-8 -top-16 size-48 rounded-full border border-white/10" />
+        <span aria-hidden className="absolute right-6 -top-10 size-36 rounded-full border border-white/10" />
+        <span className="relative font-mono text-[10px] uppercase tracking-[0.2em] text-white/80">Let's connect</span>
+        <span className="relative flex items-center gap-1.5 text-sm font-semibold text-white"><Linkedin className="size-4" aria-hidden /> LinkedIn</span>
+      </div>
+      <div className="relative px-6 pb-6">
+        <div aria-hidden className="-mt-8 mb-4 flex size-16 items-center justify-center rounded-2xl border-4 border-card bg-secondary font-display text-3xl text-foreground shadow-lg">
+          {LINKEDIN_PROFILE.initials}
+        </div>
+        <h3 className="text-xl font-semibold tracking-tight">{LINKEDIN_PROFILE.name}</h3>
+        <p className="mt-1 text-sm text-foreground/90">{LINKEDIN_PROFILE.headline}</p>
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground"><MapPin className="size-3.5" aria-hidden /> {LINKEDIN_PROFILE.location}</p>
+        <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">{LINKEDIN_PROFILE.summary}</p>
+        <span className="mt-5 flex items-center justify-between gap-3 border-t border-foreground/10 pt-4 text-sm font-semibold text-[#8ac6ff]">
+          View LinkedIn profile <ArrowUpRight className="size-4 transition-transform group-hover/linkedin:translate-x-0.5 group-hover/linkedin:-translate-y-0.5 motion-reduce:transform-none motion-reduce:transition-none" aria-hidden />
+        </span>
+      </div>
+    </a>
+  );
 }
 
 export function Contact() {
@@ -81,7 +113,19 @@ export function Contact() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr]">
           <Reveal className="space-y-6">
             <p className="text-lg leading-relaxed text-muted-foreground">Whether you need a landing page, a business website, or a modern frontend experience, I'd love to hear about your project.</p>
+            <LinkedInPreview />
             <ul className="space-y-3">
+              {CONTACT_EMAIL && (
+                <li>
+                  <a
+                    href={`mailto:${CONTACT_EMAIL}`}
+                    className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
+                  >
+                    <Mail className="size-5 shrink-0" aria-hidden />
+                    <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
+                  </a>
+                </li>
+              )}
               <li className="group relative flex items-center justify-between gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 focus-within:border-cyan/60">
                 <a
                   href={GITHUB_URL}
@@ -103,30 +147,6 @@ export function Contact() {
                   {copied ? <Check className="size-4 text-cyan" /> : <Copy className="size-4" />}
                 </button>
               </li>
-              {LINKEDIN_URL && (
-                <li>
-                  <a
-                    href={LINKEDIN_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
-                  >
-                    <Linkedin className="size-5 shrink-0" aria-hidden />
-                    <span>LinkedIn — Lemmy Nyambe</span>
-                  </a>
-                </li>
-              )}
-              {CONTACT_EMAIL && (
-                <li>
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="flex items-center gap-3 rounded-2xl border bg-card p-4 transition-colors hover:border-cyan/60 hover:text-cyan focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
-                  >
-                    <Mail className="size-5 shrink-0" aria-hidden />
-                    <span className="min-w-0 break-all">{CONTACT_EMAIL}</span>
-                  </a>
-                </li>
-              )}
             </ul>
           </Reveal>
 

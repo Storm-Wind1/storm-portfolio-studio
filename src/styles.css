@@ -80,6 +80,55 @@
   ::selection { background: oklch(0.68 0.2 292 / 40%); }
 }
 
+@layer components {
+  .action-card {
+    display: flex;
+    width: 100%;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 1px solid color-mix(in oklch, var(--cyan) 40%, transparent);
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    background: linear-gradient(120deg, color-mix(in oklch, var(--cyan) 10%, var(--card)), color-mix(in oklch, var(--primary) 7%, var(--card)));
+    color: var(--cyan);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
+  }
+  .action-card-arrow {
+    display: inline-flex;
+    width: 2rem;
+    height: 2rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid color-mix(in oklch, var(--cyan) 25%, transparent);
+    border-radius: 0.65rem;
+    background: color-mix(in oklch, var(--cyan) 8%, transparent);
+    transition: transform 200ms ease;
+  }
+  .action-card:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 4px;
+    border-color: var(--cyan);
+  }
+  @media (hover: hover) {
+    .action-card:hover {
+      transform: translateY(-3px) scale(1.015);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 30px -14px color-mix(in oklch, var(--cyan) 45%, transparent);
+    }
+    .action-card:hover .action-card-arrow { transform: translate(2px, -2px); }
+  }
+  .action-card:active { transform: scale(0.99); }
+  @media (prefers-reduced-motion: reduce) {
+    .action-card, .action-card-arrow { transition: none; }
+    .action-card:hover, .action-card:active, .action-card:hover .action-card-arrow { transform: none; }
+  }
+}
+
 @utility text-gradient {
   background: var(--gradient-accent);
   -webkit-background-clip: text;

@@ -1,6 +1,7 @@
-import { ArrowUpRight, BrainCircuit, Globe2, Layers3, Server, ShieldCheck, Wrench } from "lucide-react";
+import { BrainCircuit, Globe2, Layers3, Server, ShieldCheck, Wrench } from "lucide-react";
 import { SERVICES } from "@/data/portfolio";
 import { Reveal, SectionHeading } from "./Reveal";
+import { ActionCard } from "./ActionCard";
 
 const icons = {
   globe: Globe2,
@@ -51,12 +52,9 @@ export function Services() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="#contact"
-                  className="mt-auto inline-flex w-fit items-center gap-2 rounded pt-8 text-sm font-medium text-cyan transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan"
-                >
-                  Discuss a Project <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-                </a>
+                <div className="mt-auto pt-8">
+                  <ActionCard href="#contact">Discuss a Project</ActionCard>
+                </div>
               </Reveal>
             );
           })}
