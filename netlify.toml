@@ -1,0 +1,20 @@
+# STORM portfolio — static Netlify deployment
+# Lovable and the existing GitHub Pages build are unaffected.
+# The app currently consists of a prerenderable homepage with client-side interactivity.
+# This reuses the same proven static build used on GitHub Pages, but at the root URL.
+
+[build]
+  command = "bun install --frozen-lockfile && bun run build && test -s .output/public/index.html"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "22"
+  GITHUB_PAGES = "true"
+  GITHUB_PAGES_ROOT = "true"
+
+# Serve the homepage for future client-side routes, while existing assets
+# (such as /assets/* and /favicon.svg) continue to load normally.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
