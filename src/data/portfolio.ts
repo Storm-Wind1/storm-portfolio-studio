@@ -50,11 +50,12 @@ export const PROJECTS: Project[] = [
     status: "prototype",
   },
   {
-    name: "Upcoming Project",
-    category: "E-commerce Experience",
-    description: "A future exploration into shopping experiences that feel fast, clear, and easy to trust.",
-    tags: ["In planning"],
-    status: "upcoming",
+    name: "NOVA Store",
+    category: "E-commerce / Interactive Frontend Demo",
+    description:
+      "A fictional premium tech and lifestyle store with 16 products, searchable and filterable shopping, product options, persistent cart and wishlist, and a validated demo checkout. Built to demonstrate a complete shopping experience without real payments or order fulfillment.",
+    tags: ["React", "TypeScript", "TanStack Router", "Tailwind CSS", "localStorage"],
+    status: "prototype",
   },
   {
     name: "Upcoming Project",
