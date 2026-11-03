@@ -56,8 +56,10 @@ export const PROJECTS: Project[] = [
     description:
       "A fictional premium tech and lifestyle store with 16 products, searchable and filterable shopping, product options, persistent cart and wishlist, and a validated demo checkout. Built to demonstrate a complete shopping experience without real payments or order fulfillment.",
     tags: ["React", "TypeScript", "TanStack Router", "Tailwind CSS", "localStorage"],
-    status: "prototype",
+    status: "live",
     image: novaShot,
+    liveUrl: "https://storm-wind1.github.io/nova-storefront-studio/",
+    sourceUrl: "https://github.com/Storm-Wind1/nova-storefront-studio",
   },
   {
     name: "Upcoming Project",
