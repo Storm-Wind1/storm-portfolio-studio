@@ -23,14 +23,20 @@ PAGE / CONTENT
 
 4) Skills in attractive categories. Frontend: HTML5, CSS3, JavaScript, TypeScript, React, Tailwind CSS, Responsive Web Design. Development tools: Git, GitHub, Vite, VS Code. Additional technologies / exploration: Next.js, Python, FastAPI, AI Integration, Web Application Security. Distinguish main stack from additional exploration; do not claim expertise or use fabricated skill percentages.
 
-5) Projects: reusable project-card system with structured data array for easy future additions. Feature the only confirmed project:
+5) Projects: reusable project-card system with structured data array for easy future additions. Show finished projects with public demo links. The current projects are:
 Name: Place of Serenity.
 Category: Responsive Website / Frontend Development.
 Description: "A modern, responsive website with an organized multi-section layout, engaging visual presentation, and smooth page navigation. Built using a component-based React architecture with TypeScript and Tailwind CSS."
 Tags: React, TypeScript, Vite, Tailwind CSS, Framer Motion.
 Live Preview: https://placeserenity.com/
 View Source: https://github.com/Storm-Wind1/place-of-serenity-landing
-Use a real screenshot if retrievable, otherwise a clearly marked screenshot placeholder; don't fabricate a project preview. Add two cards marked "Upcoming Project" only, not completed projects. Potential future categories: e-commerce experiences and interactive web applications.
+Name: NOVA Store.
+Category: E-commerce / Interactive Frontend Demo.
+Description: A fictional tech and lifestyle store demonstrating product browsing, cart and wishlist persistence, and a demo checkout without real payments or fulfillment.
+Tags: React, TypeScript, TanStack Router, Tailwind CSS, localStorage.
+Live Preview: https://storm-wind1.github.io/nova-storefront-studio/
+View Source: https://github.com/Storm-Wind1/nova-storefront-studio
+Use real screenshots. Add new projects gradually as they are finished and publicly available. Keep unpublished work and future-project placeholders out of the portfolio. Both Selected Work and Skills in Practice use the PROJECTS array in src/data/portfolio.ts.
 
 6) Approach: heading "From Idea to Experience." Four stages: 01 Discover — Understand the goal, audience, and requirements. 02 Design — Plan an intuitive, visually consistent interface. 03 Develop — Build responsive and maintainable frontend experiences. 04 Refine — Test, improve, and prepare the experience for launch. Present as personal working approach, not past client claims.
 

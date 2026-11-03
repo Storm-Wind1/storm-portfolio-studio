@@ -23,13 +23,13 @@ export type Project = {
   category: string;
   description: string;
   tags: string[];
-  status: "live" | "prototype" | "upcoming";
+  status: "live";
   image?: string;
   liveUrl?: string;
   sourceUrl?: string;
 };
 
-/** Add new projects here — cards render automatically. */
+/** Add finished, publicly viewable projects here — both project sections update automatically. */
 export const PROJECTS: Project[] = [
   {
     name: "Place of Serenity",
@@ -43,14 +43,6 @@ export const PROJECTS: Project[] = [
     sourceUrl: "https://github.com/Storm-Wind1/place-of-serenity-landing",
   },
   {
-    name: "INPUTIQ",
-    category: "AI-Assisted Security Platform / Hackathon Prototype",
-    description:
-      "A team-built hackathon prototype that combines Python/FastAPI backend services, pre-deployment code analysis, web security scanning, and AI-assisted findings and remediation guidance. Integrates Semgrep and OWASP ZAP, with an interactive frontend and a reporting workflow. A prototype—not a production security service.",
-    tags: ["Python", "FastAPI", "REST APIs", "Next.js", "Semgrep", "OWASP ZAP", "AI Integration"],
-    status: "prototype",
-  },
-  {
     name: "NOVA Store",
     category: "E-commerce / Interactive Frontend Demo",
     description:
@@ -60,13 +52,6 @@ export const PROJECTS: Project[] = [
     image: novaShot,
     liveUrl: "https://storm-wind1.github.io/nova-storefront-studio/",
     sourceUrl: "https://github.com/Storm-Wind1/nova-storefront-studio",
-  },
-  {
-    name: "Upcoming Project",
-    category: "Interactive Web Application",
-    description: "A future exploration into interactive, app-like tools built for the browser.",
-    tags: ["In planning"],
-    status: "upcoming",
   },
 ];
 
@@ -85,7 +70,7 @@ export const SKILLS = {
       number: "02",
       title: "Backend & Programming",
       status: "Hands-on",
-      description: "Building Python application logic, API endpoints, and connected backend services; including hands-on FastAPI work through INPUTIQ.",
+      description: "Building Python application logic, API endpoints, and connected backend services.",
       items: ["Python", "Flask", "Django", "FastAPI", "REST APIs"],
     },
     {
@@ -104,34 +89,12 @@ export const SKILLS = {
     },
   ],
   exploring: ["Next.js", "Cybersecurity Fundamentals", "Secure Web Development", "Advanced AI/ML"],
-  appliedProjects: [
-    {
-      name: "Place of Serenity",
-      category: "Responsive website",
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
-      url: "https://placeserenity.com/",
-    },
-    {
-      name: "INPUTIQ",
-      category: "Team hackathon security prototype",
-      technologies: ["Python", "FastAPI", "REST APIs", "Semgrep", "OWASP ZAP"],
-    },
-    {
-      name: "Flask Lab Application",
-      category: "Backend project work",
-      technologies: ["Python", "Flask"],
-    },
-    {
-      name: "Medical Management Application",
-      category: "Application development project",
-      technologies: ["Python", "Django"],
-    },
-    {
-      name: "Currency Note Recognition",
-      category: "Machine learning project work",
-      technologies: ["Python", "TensorFlow"],
-    },
-  ],
+  appliedProjects: PROJECTS.map((project) => ({
+    name: project.name,
+    category: project.category,
+    technologies: project.tags,
+    url: project.liveUrl,
+  })),
 };
 
 export const SERVICES = [
@@ -163,7 +126,7 @@ export const SERVICES = [
     number: "04",
     title: "AI-Powered Prototypes",
     subtitle: "Practical AI integration",
-    description: "Prototyping applications with AI-assisted features, automation, and integrations, informed by project work such as INPUTIQ.",
+    description: "Prototyping applications with AI-assisted features, automation, and integrations.",
     icon: "brain",
     tags: ["AI APIs", "Workflow prototypes", "Python"],
   },
@@ -179,7 +142,7 @@ export const SERVICES = [
     number: "06",
     title: "Developer & Security Tooling",
     subtitle: "Exploratory project work",
-    description: "Experimental developer tools and security-conscious workflows. INPUTIQ demonstrates hands-on scanner integration—not a claim of certified security auditing.",
+    description: "Exploring experimental developer tools, scanner integration, and security-conscious workflows.",
     icon: "shield",
     tags: ["Security workflows", "Scanner integration", "Developer utilities"],
   },

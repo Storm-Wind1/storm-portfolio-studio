@@ -63,10 +63,9 @@ export function Services() {
         </div>
         <Reveal className="mt-9 rounded-2xl border border-primary/25 bg-card/60 px-6 py-5 sm:px-8">
           <p className="text-sm leading-relaxed text-muted-foreground">
-            <span className="font-medium text-foreground">Backend work in practice:</span>{" "}
-            INPUTIQ, a team-built hackathon prototype, brought together FastAPI endpoints,
-            security scanners, AI-assisted analysis, and a frontend reporting experience.
-            See it in <a href="#projects" className="font-medium text-cyan underline underline-offset-4 hover:text-foreground">Selected Work</a>.
+            <span className="font-medium text-foreground">Explore my published work:</span>{" "}
+            Visit Place of Serenity and try the NOVA Store e-commerce demo to see my frontend work in action.
+            View both in <a href="#projects" className="font-medium text-cyan underline underline-offset-4 hover:text-foreground">Selected Work</a>.
           </p>
         </Reveal>
       </div>
