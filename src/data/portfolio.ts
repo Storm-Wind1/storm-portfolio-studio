@@ -1,4 +1,5 @@
 import serenityShot from "@/assets/place-of-serenity.jpg";
+import novaShot from "@/assets/nova-store.jpg";
 
 export const GITHUB_USERNAME = "Storm-Wind1";
 export const GITHUB_URL = "https://github.com/Storm-Wind1";
@@ -56,6 +57,7 @@ export const PROJECTS: Project[] = [
       "A fictional premium tech and lifestyle store with 16 products, searchable and filterable shopping, product options, persistent cart and wishlist, and a validated demo checkout. Built to demonstrate a complete shopping experience without real payments or order fulfillment.",
     tags: ["React", "TypeScript", "TanStack Router", "Tailwind CSS", "localStorage"],
     status: "prototype",
+    image: novaShot,
   },
   {
     name: "Upcoming Project",
