@@ -1,20 +1,14 @@
-# STORM portfolio — static Netlify deployment
-# Lovable and the existing GitHub Pages build are unaffected.
-# The app currently consists of a prerenderable homepage with client-side interactivity.
-# This reuses the same proven static build used on GitHub Pages, but at the root URL.
+# STORM portfolio: Netlify deployment using TanStack Start + Nitro SSR.
+# The Lovable build and GitHub Pages prerender build are configured separately.
+# Nitro detects Netlify and generates its server function plus static assets.
 
 [build]
-  command = "bun install --frozen-lockfile && bun run build && test -s .output/public/index.html"
-  publish = ".output/public"
+  command = "bun install --frozen-lockfile && bun run build && test -d dist/assets"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
-  GITHUB_PAGES = "true"
-  GITHUB_PAGES_ROOT = "true"
+  NITRO_PRESET = "netlify"
 
-# Serve the homepage for future client-side routes, while existing assets
-# (such as /assets/* and /favicon.svg) continue to load normally.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Do not add a blanket /* -> /index.html redirect here:
+# Nitro generates the routing needed to serve SSR via Netlify Functions.
